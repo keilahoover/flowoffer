@@ -4,15 +4,18 @@ var knex = require('../knex')
 
 /* GET all offers. */
 router.get('/', function(req, res, next) {
-  // res.send('GET all offers');
   knex('offer')
-    .select('name')
+    .select('id', 'name')
     .then(rows => res.json(rows))
 });
 
 // GET a single offer
 router.get('/:id', function (req, res, next) {
-  res.send('GET a single offer')
+  const { id } = req.params
+  knex('offer')
+    .select('id', 'name')
+    .where('id', id)
+    .then(rows => res.json(rows))
 })
 
 //POST a new offer
